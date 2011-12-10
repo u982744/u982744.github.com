@@ -33,13 +33,23 @@
 	<!-- container -->
 	<div class="container">
 
-		<div class="row">
+		<div class="row header">
 			<div class="twelve columns">
 				My header will go here...
 			</div>
 		</div>
+		
+		<div class="row nav">
+			<div class="twelve columns">
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/about.html">About</a></li>
+					<li><a href="/posts.html">Posts</a></li>
+				</ul>
+			</div>
+		</div>
 
-		<div class="row">
+		<div class="row content">
 			<div class="eight columns">
 				{{ content }}
 			</div>
@@ -52,7 +62,7 @@
 	</div>
 	<!-- container -->
 
-    <div class="row">
+    <div class="row footer">
         <div class="twelve columns">
             My footer will go here...
         </div>
