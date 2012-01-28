@@ -4,6 +4,7 @@ title: Tim Berman
 ---
 
 <div class="header">
+	<div class="left back"><a href="">Back</a></div>
 	<h1 class="title">{{ page.title }}</h1>
 </div><!--header-->
 
@@ -14,7 +15,7 @@ title: Tim Berman
 	<h2 class="title2">Posts</h2>
 	<div class="posts box-white">
 	    {% for post in site.posts %}
-	        <p><a href="{{ post.url }}">{{ post.title }} <span>{{ post.date | date_to_string }}</span></a></p>
+	        <p><a href="{{ post.url }}">{{ post.title }} <span>{{ post.date | date: "%d-%m-%Y" }}</span></a></p>
 	    {% endfor %}
 	</div>
 </div><!--content-->

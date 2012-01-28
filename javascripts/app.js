@@ -25,4 +25,12 @@ $(document).ready(function () {
 
 	activateSection(window.location.href);
 
+	$("#post h2").each(function (index, elem) {
+
+	    $(elem).addClass("title");
+
+	});
+
+	$(".header .back a").attr("href", document.referrer);
+
 });
