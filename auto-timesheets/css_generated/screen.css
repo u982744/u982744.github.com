@@ -1,0 +1,582 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/css_generated/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* animations */
+@-webkit-keyframes slideOutToLeft {
+  /* line 3, ../sass/_animations.scss */
+  0% {
+    -webkit-transform: translateX(0%);
+    opacity: 1;
+    -moz-opacity: 1;
+    filter: alpha(opacity=1);
+  }
+
+  /* line 9, ../sass/_animations.scss */
+  100% {
+    -webkit-transform: translateX(-100%);
+    opacity: 0;
+    -moz-opacity: 0;
+    filter: alpha(opacity=0);
+  }
+}
+
+@-webkit-keyframes slideInFromRight {
+  /* line 17, ../sass/_animations.scss */
+  0% {
+    -webkit-transform: translateX(100%);
+    opacity: 0;
+    -moz-opacity: 0;
+    filter: alpha(opacity=0);
+  }
+
+  /* line 23, ../sass/_animations.scss */
+  100% {
+    -webkit-transform: translateX(0%);
+    opacity: 1;
+    -moz-opacity: 1;
+    filter: alpha(opacity=1);
+  }
+}
+
+@-webkit-keyframes slideOutToRight {
+  /* line 32, ../sass/_animations.scss */
+  0% {
+    -webkit-transform: translateX(0%);
+    opacity: 1;
+    -moz-opacity: 1;
+    filter: alpha(opacity=1);
+  }
+
+  /* line 38, ../sass/_animations.scss */
+  100% {
+    -webkit-transform: translateX(100%);
+    opacity: 0;
+    -moz-opacity: 0;
+    filter: alpha(opacity=0);
+  }
+}
+
+@-webkit-keyframes slideInFromLeft {
+  /* line 46, ../sass/_animations.scss */
+  0% {
+    -webkit-transform: translateX(-100%);
+    opacity: 0;
+    -moz-opacity: 0;
+    filter: alpha(opacity=0);
+  }
+
+  /* line 52, ../sass/_animations.scss */
+  100% {
+    -webkit-transform: translateX(0%);
+    opacity: 1;
+    -moz-opacity: 1;
+    filter: alpha(opacity=1);
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  /* line 61, ../sass/_animations.scss */
+  0% {
+    opacity: 1;
+    -moz-opacity: 1;
+    filter: alpha(opacity=1);
+  }
+
+  /* line 66, ../sass/_animations.scss */
+  100% {
+    opacity: 0;
+    -moz-opacity: 0;
+    filter: alpha(opacity=0);
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  /* line 74, ../sass/_animations.scss */
+  0% {
+    opacity: 0;
+    -moz-opacity: 0;
+    filter: alpha(opacity=0);
+  }
+
+  /* line 79, ../sass/_animations.scss */
+  100% {
+    opacity: 1;
+    -moz-opacity: 1;
+    filter: alpha(opacity=1);
+  }
+}
+
+/* line 1, ../sass/_layout.scss */
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+}
+
+/* we'll add outlines on a case by case basis */
+/* line 2, ../sass/_layout.scss */
+ul {
+  list-style-type: none;
+}
+
+/* line 4, ../sass/_layout.scss */
+html {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* line 9, ../sass/_layout.scss */
+body {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-perspective: 800;
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  -webkit-text-size-adjust: none;
+  -webkit-transform-style: preserve-3d;
+  -webkit-user-select: none;
+  font: normal 14px Helvetica, Sans-serif;
+  /*font-family: 'PT Sans Narrow', sans-serif;*/
+  background: url(/img/section-bg.png) repeat 0 0;
+  background-size: 320px auto;
+}
+
+/* line 26, ../sass/_layout.scss */
+body a {
+  cursor: pointer;
+  display: block;
+}
+
+/* line 31, ../sass/_layout.scss */
+body section {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  display: block;
+  pointer-events: none;
+  -webkit-perspective: 800;
+  -webkit-transform: translateX(-100%);
+}
+
+/* line 41, ../sass/_layout.scss */
+.box {
+  padding: 20px;
+}
+
+/* line 45, ../sass/_layout.scss */
+.box h2 {
+  color: #4c566c;
+  padding: 0px 12px 6px 12px;
+}
+
+/* line 50, ../sass/_layout.scss */
+section .row {
+  border-width: 0px 0 1px 0;
+  border-style: solid;
+  border-color: #e9e9e9;
+  background-color: #fff;
+}
+
+/* line 56, ../sass/_layout.scss */
+section .row.touchstart {
+  background: #eee;
+}
+
+/* line 58, ../sass/_layout.scss */
+section .row.first {
+  -webkit-border-radius: 10px 10px 0px 0px;
+  border-top-width: 1px;
+}
+
+/* line 63, ../sass/_layout.scss */
+section .row.last {
+  -webkit-border-radius: 0px 0px 10px 10px;
+  border-bottom-width: 1px;
+}
+
+/* line 69, ../sass/_layout.scss */
+.hours-under {
+  color: red;
+}
+
+/* line 70, ../sass/_layout.scss */
+.hours-over {
+  color: green;
+}
+
+/* line 72, ../sass/_layout.scss */
+#timesheets .hours {
+  float: right;
+  font-size: 1.1em;
+}
+
+/* line 77, ../sass/_layout.scss */
+body section.active {
+  display: block;
+  -webkit-transform: translateX(0%);
+  /*-webkit-animation: slideInFromRight 0.5s ease-in-out;*/
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* use these classes instead for controlling CSS sliding animation */
+/* line 87, ../sass/_layout.scss */
+body section.slideOutToLeft {
+  -webkit-transform: translateX(-100%);
+  -webkit-animation: slideOutToLeft 0.25s ease-in-out;
+  pointer-events: auto;
+}
+
+/* line 92, ../sass/_layout.scss */
+body section.slideOutToRight {
+  -webkit-transform: translateX(-100%);
+  -webkit-animation: slideOutToRight 0.25s ease-in-out;
+  pointer-events: auto;
+}
+
+/* line 97, ../sass/_layout.scss */
+body section.slideInFromLeft {
+  opacity: 1;
+  -webkit-transform: translateX(0%);
+  -webkit-animation: slideInFromLeft 0.25s ease-in-out;
+  pointer-events: auto;
+}
+
+/* line 103, ../sass/_layout.scss */
+body section.slideInFromRight {
+  opacity: 1;
+  -webkit-transform: translateX(0%);
+  -webkit-animation: slideInFromRight 0.25s ease-in-out;
+  pointer-events: auto;
+}
+
+/* for changing section ie from timesheets to offices */
+/* line 111, ../sass/_layout.scss */
+body section.fadeOut {
+  opacity: 0;
+  -moz-opacity: 0;
+  filter: alpha(opacity=0);
+  -webkit-animation: fadeOut 0.25s ease-in-out;
+}
+
+/* line 117, ../sass/_layout.scss */
+body section.fadeIn {
+  opacity: 1;
+  -moz-opacity: 1;
+  filter: alpha(opacity=1);
+  -webkit-animation: fadeIn 0.25s ease-in-out;
+}
+
+/* sprite */
+                   /*
+$timesheets-spacing: 50px;
+$timesheets-sprite-dimensions: false;
+$timesheets-footer-bg-repeat: repeat-x;
+
+@import "timesheets/*.png";
+@include all-timesheets-sprites;
+*/
+/* line 12, ../sass/_sprite.scss */
+footer li a {
+  background-size: 76px auto;
+  width: 76px;
+  height: 44px;
+  text-indent: -9999em;
+}
+
+/* line 19, ../sass/_sprite.scss */
+footer.timesheets-footer-bg {
+  background: url(/img/timesheets/footer-bg.png) repeat-x 0 0;
+  background-size: auto 50px;
+}
+
+/* line 24, ../sass/_sprite.scss */
+header.timesheets-header-bg {
+  background: url(/img/timesheets/header-bg.png) repeat-x 0 0;
+  background-size: auto 44px;
+}
+
+/* line 29, ../sass/_sprite.scss */
+section .row a {
+  background: url(/img/timesheets/icon-arrow.png) no-repeat right 6px;
+  background-size: auto 32px;
+  padding: 12px 30px 12px 12px;
+  position: relative;
+}
+
+/* line 36, ../sass/_sprite.scss */
+section#offices .row a {
+  padding-left: 40px;
+}
+
+/* line 38, ../sass/_sprite.scss */
+section .row a .icon-office {
+  background: url(/img/timesheets/icon-office.png) no-repeat 5px 0;
+  background-size: auto 45px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 31px;
+  height: 45px;
+  text-indent: -9999em;
+}
+
+/* line 50, ../sass/_sprite.scss */
+footer li a.timesheets-icon-timesheets {
+  background: url(/img/timesheets/icon-timesheets.png) no-repeat 0 0;
+}
+
+/* line 53, ../sass/_sprite.scss */
+footer li a.timesheets-icon-offices {
+  background: url(/img/timesheets/icon-offices.png) no-repeat 0 0;
+}
+
+/* line 56, ../sass/_sprite.scss */
+footer li a.timesheets-icon-help {
+  background: url(/img/timesheets/icon-help.png) no-repeat 0 0;
+}
+
+/* line 59, ../sass/_sprite.scss */
+footer li a.timesheets-icon-settings {
+  background: url(/img/timesheets/icon-settings.png) no-repeat 0 0;
+}
+
+/* line 64, ../sass/_sprite.scss */
+footer li a.timesheets-icon-timesheets.active,
+footer li a.timesheets-icon-timesheets.touchstart {
+  background: url(/img/timesheets/icon-timesheets_active.png) no-repeat 0 0;
+}
+
+/* line 68, ../sass/_sprite.scss */
+footer li a.timesheets-icon-offices.active,
+footer li a.timesheets-icon-offices.touchstart {
+  background: url(/img/timesheets/icon-offices_active.png) no-repeat 0 0;
+}
+
+/* line 72, ../sass/_sprite.scss */
+footer li a.timesheets-icon-help.active,
+footer li a.timesheets-icon-help.touchstart {
+  background: url(/img/timesheets/icon-help_active.png) no-repeat 0 0;
+}
+
+/* line 76, ../sass/_sprite.scss */
+footer li a.timesheets-icon-settings.active,
+footer li a.timesheets-icon-settings.touchstart {
+  background: url(/img/timesheets/icon-settings_active.png) no-repeat 0 0;
+}
+
+/* buttons */
+/* line 2, ../sass/_buttons.scss */
+.row .delete {
+  display: none;
+  text-indent: -9999em;
+}
+
+/* line 8, ../sass/_buttons.scss */
+.button {
+  display: -webkit-box;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
+}
+
+/* Bordered Button Styles */
+/* line 14, ../sass/_buttons.scss */
+.button.bordered {
+  -webkit-box-shadow: 0 1px 1px #9aa5bb, 0 -1px 1px #8e96a5;
+  border: solid 1px #54617d;
+  border-color: #484e59 #54617d #4c5c7a #54617d;
+  display: inline-block;
+  cursor: pointer;
+  padding: 0px 10px;
+  font-size: 12px;
+  line-height: 28px;
+  height: 30px;
+  margin-top: 1px;
+  -webkit-box-sizing: border-box;
+  -webkit-border-radius: 5px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#92a1bf), color-stop(0.25, #798aad), color-stop(0.5, #6276a0), color-stop(0.5, #556a97), color-stop(0.75, #566c98), to(#546993));
+  color: #fff;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+}
+
+/* line 39, ../sass/_buttons.scss */
+.button.bordered:hover, .button.bordered.touchstart {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#7d88a5), color-stop(0.25, #58698c), color-stop(0.5, #3a4e78), color-stop(0.5, #253c6a), color-stop(0.75, #273f6d), to(#273f6d));
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* End Bordered Button Styles */
+/* Back Bordered Button Styles */
+/* line 53, ../sass/_buttons.scss */
+.button.bordered.back {
+  padding: 0px 7px 0px 3px;
+  margin-left: 10px;
+  /*position: relative;*/
+}
+
+/* line 58, ../sass/_buttons.scss */
+.button.bordered.back > span {
+  position: relative;
+  z-index: 1;
+}
+
+/* line 62, ../sass/_buttons.scss */
+.button.bordered.back:before {
+  content: " ";
+  display: block;
+  z-index: 0;
+  background-image: -webkit-gradient(linear, left top, right bottom, from(#92a1bf), color-stop(0.3, #798aad), color-stop(0.51, #6276a0), color-stop(0.51, #556a97), color-stop(0.75, #566c98), to(#546993));
+  border-left: solid 1px #484e59;
+  border-bottom: solid 1px #9aa5bb;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 4px;
+  height: 23.5px;
+  width: 23.5px;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(black), color-stop(0.5, black), color-stop(0.5, transparent), to(transparent));
+  position: absolute;
+  left: -9px;
+  top: 2.5px;
+  -webkit-background-clip: content;
+}
+
+/* line 94, ../sass/_buttons.scss */
+.button.bordered.back:hover:before, .button.bordered.back.touchstart:before {
+  background-image: -webkit-gradient(linear, left top, right bottom, from(#7d88a5), color-stop(0.3, #58698c), color-stop(0.51, #3a4e78), color-stop(0.51, #253c6a), color-stop(0.75, #273f6d), to(#273f6d));
+}
+
+/* End Back Bordered Button Styles */
+/* Next Bordered Button Styles */
+/* line 108, ../sass/_buttons.scss */
+.button.bordered.next {
+  padding: 0px 3px 0px 7px;
+  margin-right: 10px;
+  position: relative;
+}
+
+/* line 113, ../sass/_buttons.scss */
+.button.bordered.next > span {
+  position: relative;
+  z-index: 1;
+}
+
+/* line 117, ../sass/_buttons.scss */
+.button.bordered.next:before {
+  content: " ";
+  display: block;
+  z-index: 0;
+  background-image: -webkit-gradient(linear, left top, right bottom, from(#92a1bf), color-stop(0.3, #798aad), color-stop(0.51, #6276a0), color-stop(0.51, #556a97), color-stop(0.75, #566c98), to(#546993));
+  border-right: solid 1px #9aa5bb;
+  border-top: solid 1px #484e59;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-top-right-radius: 4px;
+  height: 23.5px;
+  width: 23.5px;
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  -webkit-mask-image: -webkit-gradient(linear, right top, left bottom, from(black), color-stop(0.5, black), color-stop(0.5, transparent), to(transparent));
+  position: absolute;
+  right: -9px;
+  top: 2.5px;
+  -webkit-background-clip: content;
+}
+
+/* line 149, ../sass/_buttons.scss */
+.button.bordered.next:hover:before, .button.bordered.next.touchstart:before {
+  background-image: -webkit-gradient(linear, left top, right bottom, from(#7d88a5), color-stop(0.3, #58698c), color-stop(0.51, #3a4e78), color-stop(0.51, #253c6a), color-stop(0.75, #273f6d), to(#273f6d));
+}
+
+/* End Next Bordered Button Styles */
+/* header */
+/* line 2, ../sass/_header.scss */
+header {
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* line 8, ../sass/_header.scss */
+header h1 {
+  font-size: 1.5em;
+  line-height: 44px;
+  padding: 0 12px;
+  text-shadow: #333333 0px -1px 1px;
+}
+
+/* line 15, ../sass/_header.scss */
+header h1.centre {
+  text-align: center;
+}
+
+/* line 19, ../sass/_header.scss */
+header h1.right {
+  float: right;
+}
+
+/* line 20, ../sass/_header.scss */
+header h1.left {
+  float: left;
+}
+
+/* line 22, ../sass/_header.scss */
+header {
+  position: relative;
+}
+
+/* line 26, ../sass/_header.scss */
+header .button {
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+/* line 33, ../sass/_header.scss */
+header .edit {
+  left: 5px;
+}
+
+/* line 37, ../sass/_header.scss */
+header .right {
+  right: 5px;
+  left: auto;
+}
+
+/* footer */
+/* line 2, ../sass/_footer.scss */
+footer {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background: #000;
+  color: #fff;
+}
+
+/* line 11, ../sass/_footer.scss */
+footer ul li {
+  float: left;
+  margin: 3px 2px;
+}
+
+/* line 17, ../sass/_footer.scss */
+footer ul li a,
+footer ul li a.active {
+  float: left;
+  padding: 5px;
+}
+
+/*
+footer ul li a.active {
+ 	background: #444;
+}
+*/

@@ -1,0 +1,40 @@
+/* header */
+header {
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+header h1 {
+  font-size: 1.5em;
+  line-height: 44px;
+  padding: 0 12px;
+  text-shadow: #333 0px -1px 1px;
+}
+
+header h1.centre {
+  text-align:center;
+}
+
+header h1.right {float: right;}
+header h1.left {float: left;}
+
+header {
+  position: relative;
+}
+
+header .button {
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+header .edit {
+  left: 5px;
+}
+
+header .right {
+  right: 5px;
+  left: auto;
+}

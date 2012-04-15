@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="red" />    
+    <title>Auto Timesheets</title>
+    <!--link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700"-->
+    <link rel="stylesheet" href="css_generated/screen.css" media="all">
+  </head>
+  <body>
+
+    <div id="timesheet-app">
+        <!-- header pages -->
+        <header class="timesheets-header-bg"></header>
+        
+        <!-- timesheets pages -->
+        <section id="timesheets">
+            <ul class="list scrollable"></ul>
+        </section>
+        <section id="timesheets-week">
+            <ul class="list"></ul>
+        </section>
+        <section id="timesheets-day">
+            <ul class="list"></ul>
+        </section>
+        <section id="timesheets-item"></section>
+        <section id="timesheets-add">timesheet add page...</section>
+        
+        <!-- office pages -->
+        <section id="offices">
+            <ul class="list"></ul>
+        </section>
+        <section id="offices-add">
+            <div class="box">
+                <h2>Select by</h2>
+                <ul class="list">
+                    <li class="row first"><a class="animate-slideForward" data-href="page/offices-add-current">My Current Location</a></li>
+                    <li class="row"><a class="animate-slideForward" data-href="page/offices-add-map">Map</a></li>
+                    <li class="row last"><a class="animate-slideForward" data-href="page/offices-add-address">Address</a></li>
+                </ul>
+            </div>
+        </section>
+        <section id="offices-add-current">current</section>
+        <section id="offices-add-map">map</section>
+        <section id="offices-add-address">address</section>
+        <section id="offices-edit">edit</section>
+        
+        <!-- help pages -->
+        <section id="help"></section>
+
+        <!-- settings pages -->
+        <section id="settings"></section>
+        
+        <!-- footer -->
+        <footer class="timesheets-footer-bg">
+            <ul>
+                <li><a class="animate-fade timesheets-icon-timesheets" data-href="page/timesheets">Timesheets</a></li>
+                <li><a class="animate-fade timesheets-icon-offices" data-href="page/offices">Offices</a></li>
+                <li><a class="animate-fade timesheets-icon-help" data-href="page/help">Help</a></li>
+                <li><a class="animate-fade timesheets-icon-settings" data-href="page/settings">Settings</a></li>
+            </ul>
+        </footer>
+    </div>
+    
+    
+    <!-- Templates -->
+    <script type="text/template" id="tmpl-header">
+        <%
+        var mytitle = title,
+            mytitleClass = titleClass || "",
+            buttonsLen = buttons.length,
+            i,
+            href;
+
+        if ($.isFunction(mytitle)) {
+            mytitle = title(weekNum, dayNum, itemNum);
+        }
+
+        print('<h1 class="' + mytitleClass + '">' + mytitle + '</h1>');
+
+        if (buttonsLen > 0) {
+        %>
+            <ul>
+                <%
+                for (i = 0; i < buttonsLen; i = i + 1) {
+                    if (buttons[i].href) {
+                        print('<li><a data-href="' + buttons[i].href + '" class="button ' + buttons[i].buttonClass + '">' + buttons[i].title + '</a></li>');
+                    } else {
+                        print('<li><a class="button ' + buttons[i].buttonClass + '">' + buttons[i].title + '</a></li>');
+                    }
+                }
+                %>
+            </ul>
+        <%
+        }
+        %>
+    </script>
+
+    <script type="text/template" id="tmpl-office">
+        <a class="animate-slideForward" data-href="/offices/edit/<%= officeNum %>" class="office">
+            <span class="icon icon-office">icon</span>
+            <span class="location"><%= locationName %></span>
+            <span class="button delete">Delete</span>
+        </a>
+    </script>
+
+    <script type="text/template" id="tmpl-office-edit">
+        <form action="/user/update" id="form-user-settings">
+            <ul class="office">
+                <li class="form-item office-locationName">
+                    <label for="locationName">Name:</label>
+                    <input type="text" name="locationName" id="locationName" value="<%= locationName %>" />
+                </li>
+                <li class="form-item office-address">
+                    <label for="address">Address:</label>
+                    <input type="text" name="address" id="address" value="<%= address %>" />
+                </li>
+                <li class="form-item office-companyName">
+                    <label for="companyName">Company Name:</label>
+                    <input type="text" name="companyName" id="companyName" value="<%= companyName %>" />
+                </li>
+            </ul>
+        </form>
+    </script>
+
+    <script type="text/template" id="tmpl-timesheets">
+        <a class="animate-slideForward" data-href="/week/<%= weekNum %>" class="timesheet timesheet-weeks">
+            <span class="daterange"><%= daterange %></span>
+            <% if (overHours) { %>
+                <span class="hours hours-over"><%= hours %></span>
+            <% } else { %>
+                <span class="hours hours-under"><%= hours %></span>
+            <% } %>
+        </a>
+    </script>
+
+    <script type="text/template" id="tmpl-timesheets-week">
+        <a class="animate-slideForward" data-href="/week/<%= weekNum %>/day/<%= dayNum %>" class="timesheet timesheet-week">
+            <span class="dayName"><%= dayName %></span>
+            <span class="date"><%= date %></span>
+            <% if (overHours) { %>
+                <span class="hours hours-over"><%= hours %></span>
+            <% } else { %>
+                <span class="hours hours-under"><%= hours %></span>
+            <% } %>
+        </a>
+    </script>
+
+    <script type="text/template" id="tmpl-timesheets-day">
+        <a class="animate-slideForward" data-href="/week/<%= weekNum %>/day/<%= dayNum %>/item/<%= itemNum %>" class="timesheet timesheet-day">
+            <span class="timeRange"><%= timeRange %></span>
+            <span class="office"><%= office %></span>
+        </a>
+    </script>
+
+    <script type="text/template" id="tmpl-timesheets-add">
+    template for timesheets-add
+    </script>
+
+    <script type="text/template" id="tmpl-timesheets-item">
+        <form action="/update/week/<%= weekNum %>/day/<%= dayNum %>/item/<%= itemNum %>" id="form-timesheet-update">
+            <ul>
+                <li>
+                    <label>Office:</label>
+                    <select name="locationName" id="timesheet-locationName">
+                        <%
+                        var i,
+                            iLen = offices.length,
+                            office;
+
+                        for (i = 0; i < iLen; i = i + 1) {
+                            office = offices[i].locationName;
+                            if (office === locationName) {
+                                print('<option value="' + office + '" selected="selected">' + office + '</option>');
+                            } else {
+                                print('<option value="' + office + '">' + office + '</option>');
+                            }
+                        }
+                        %>
+                    </select>
+                </li>
+                <li>
+                    <%
+                    var start = moment(new Date(startDateTime)),
+                        startHour = start.format("HH"),
+                        startMinute = start.format("mm"),
+                        end = moment(new Date(endDateTime)),
+                        endHour = end.format("HH"),
+                        endMinute = end.format("mm"),
+                        i,
+                        str;
+
+                    %>
+                    <label>startDateTime:</label>
+
+                    <select id="startDateTime-hour" name="startDateTime-hour">
+                        <%
+                        for (i = 0; i < 24; i = i + 1) {
+                            str = (i < 10) ? "0" + i : i;
+                            if (str.toString() === startHour) {
+                                print('<option value="' + i + '" selected="selected">' + str + '</option>');
+                            } else {
+                                print('<option value="' + i + '">' + str + '</option>');
+                            }
+                        }
+                        %>
+                    <select>
+                    <select id="startDateTime-minute" name="startDateTime-minute">
+                        <%
+                        for (i = 0; i < 60; i = i + 5) {
+                            str = (i < 10) ? "0" + i : i;
+                            if (str.toString() === startMinute) {
+                                print('<option value="' + i + '" selected="selected">' + str + '</option>');
+                            } else {
+                                print('<option value="' + i + '">' + str + '</option>');
+                            }
+                        }
+                        %>
+                    <select>
+                    <input type="hidden" name="startDateTime" id="timesheet-startDateTime" value="<%= startDateTime %>"/>
+                </li>
+                <li>
+                    <label>endDateTime:</label>
+
+                    <select id="endDateTime-hour" name="endDateTime-hour">
+                        <%
+                        for (i = 0; i < 24; i = i + 1) {
+                            str = (i < 10) ? "0" + i : i;
+                            if (str.toString() === endHour) {
+                                print('<option value="' + i + '" selected="selected">' + str + '</option>');
+                            } else {
+                                print('<option value="' + i + '">' + str + '</option>');
+                            }
+                        }
+                        %>
+                    <select>
+                    <select id="endDateTime-minute" name="endDateTime-minute">
+                        <%
+                        for (i = 0; i < 60; i = i + 5) {
+                            str = (i < 10) ? "0" + i : i;
+                            if (str.toString() === endMinute) {
+                                print('<option value="' + i + '" selected="selected">' + str + '</option>');
+                            } else {
+                                print('<option value="' + i + '">' + str + '</option>');
+                            }
+                        }
+                        %>
+                    <select>
+                    <input type="hidden" name="endDateTime" id="timesheet-endDateTime" value="<%= endDateTime %>"/>
+                </li>
+                <li class="form-item submit">
+                    <input type="hidden" name="weekNum" value="<%= weekNum %>" />
+                    <input type="hidden" name="dayNum" value="<%= dayNum %>" />
+                    <input type="hidden" name="itemNum" value="<%= itemNum %>" />
+                    <input type="hidden" name="timesheetNum" value="<%= timesheetNum %>" />
+                    <input type="hidden" name="timesheetCount" value="<%= timesheetCount %>" />
+                    <input type="submit" value="Submit" />
+                </li>
+            </ul>
+        </form>
+    </script>
+
+
+    <script type="text/template" id="tmpl-help">
+        <ul class="list help">
+        <% _.each(faqs, function(faq) { %>
+            <li class="faq">
+                <h2><%= faq.question %></h2>
+                <p><%= faq.answer %></p>
+            </li>
+        <% }); %>
+        </ul>
+    </script>
+
+    <script type="text/template" id="tmpl-header">
+        <h1><%= title %></h1>
+        <% _.each(buttons, function(button) { %>
+            <a data-href="<%= buttonHref %>" class="button <%= buttonClass %>"><%= buttonText %></a>
+        <% }); %>
+    </script>
+
+    <script type="text/template" id="tmpl-user-settings">
+        <form action="/user/update" id="form-user-settings">
+            <ul class="user-settings">
+                <li class="form-item user-start">
+                    <p>
+                        <span class="label">Start Page:</span>
+                        <% if (start === "timesheets") { %>
+                            <label for="radio-timesheets">Timesheets</label>
+                            <input type="radio" name="start" value="timesheets" id="radio-timesheets" checked="checked" />
+
+                            <label for="radio-offices">Offices</label>
+                            <input type="radio" name="start" value="offices" id="radio-offices" />
+                        <% } else { %>
+                            <label for="radio-timesheets">Timesheets</label>
+                            <input type="radio" name="start" value="timesheets" id="radio-timesheets" />
+
+                            <label for="radio-offices">Offices</label>
+                            <input type="radio" name="start" value="offices" id="radio-offices" checked="checked" />
+                        <% } %>
+                    </p>
+                </li>
+                <li class="form-item user-interval">
+                    <label for="updateInterval">GPS Update Interval:</label>
+                    <select id="updateInterval" name="updateInterval">
+                        <%
+                            var opts = [1, 3, 5, 10, 15, 30, 60],
+                                optsLen = opts.length,
+                                i,
+                                units;
+
+                            for (i = 0; i < optsLen; i = i + 1) {
+                                units = (opts[i] > 1) ? " minutes": " minute";
+                                if (parseInt(updateInterval, 10) === opts[i]) {
+                                    print('<option value="' + opts[i] + '" selected="selected">' + opts[i] + units + '</option>');
+                                } else {
+                                    print('<option value="' + opts[i] + '">' + opts[i] + units + '</option>');
+                                }
+                            }
+                        %>
+                    </select>
+                </li>
+                <li class="form-item user-range">
+                    <label for="range">GPS Range:</label>
+                    <select id="range" name="range">
+                        <%
+                            var opts = [50, 100, 200, 500, 1000],
+                                optsLen = opts.length,
+                                i,
+                                units;
+
+                            for (i = 0; i < optsLen; i = i + 1) {
+                                units = (opts[i] > 1) ? " metres": " metre";
+                                if (parseInt(range, 10) === opts[i]) {
+                                    print('<option value="' + opts[i] + '" selected="selected">' + opts[i] + units + '</option>');
+                                } else {
+                                    print('<option value="' + opts[i] + '">' + opts[i] + units + '</option>');
+                                }
+                            }
+                        %>
+                    </select>
+                </li>
+                <li class="form-item user-hours-day">
+                    <label for="hoursDay">Standard Working Hours Per Day:</label>
+                    <select id="hoursDay" name="hoursDay">
+                        <%
+                            var i,
+                                units = " hours";
+
+                            for (i = 4; i <= 10; i = i + 0.5) {
+                                if (hoursDay.toString() === i.toString()) {
+                                    print('<option value="' + i + '" selected="selected">' + i + units + '</option>');
+                                } else {
+                                    print('<option value="' + i + '">' + i + units + '</option>');
+                                }
+                            }
+                        %>
+                    </select>
+                </li>
+                <li class="form-item user-hours-week">
+                    <label for="hoursWeek">Standard Working Hours Per Week:</label>
+                    <select id="hoursWeek" name="hoursWeek">
+                        <%
+                            var i,
+                                units = " hours";
+
+                            for (i = 30; i <= 80; i = i + 0.5) {
+                                if (hoursWeek.toString() === i.toString()) {
+                                    print('<option value="' + i + '" selected="selected">' + i + units + '</option>');
+                                } else {
+                                    print('<option value="' + i + '">' + i + units + '</option>');
+                                }
+                            }
+                        %>
+                    </select>
+                </li>
+                <li class="form-item user-week-start">
+                    <label for="weekStart">Week Starts:</label>
+                    <select id="weekStart" name="weekStart">
+                        <%
+                            var names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                                i;
+
+                            for (i = 0; i < 7; i = i + 1) {
+                                if (parseInt(weekStart, 10) === i) {
+                                    print('<option value="' + i + '" selected="selected">' + names[i] + '</option>');
+                                } else {
+                                    print('<option value="' + i + '">' + names[i] + '</option>');
+                                }
+                            }
+                        %>
+                    </select>
+                </li>
+                <li class="form-item user-email">
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" id="email" value="<%= email %>" />
+                </li>
+                <li class="form-item submit">
+                    <input type="submit" value="Submit" />
+                </li>
+            </ul>
+        </form>
+    </script>
+
+    <script src="js/jquery-1.6.4.min.js"></script>    
+    <script src="js/underscore-1.3.1.js"></script>
+    <script src="js/moment.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/backbone-nested.js"></script>
+    <script src="js/touch-scroll.min.js"></script>
+    <script>
+        /*
+        $(document).ready(function() {
+            if (!!('ontouchstart' in window)) {
+                $('.scrollable').touchScroll({touchTags: ['a']});
+            }
+        });
+        */
+    </script>
+    <script src="js/app2.js"></script>
+
+    
+  </body>
+</html>

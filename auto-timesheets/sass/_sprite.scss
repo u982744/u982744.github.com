@@ -1,0 +1,78 @@
+/* sprite */
+
+/*
+$timesheets-spacing: 50px;
+$timesheets-sprite-dimensions: false;
+$timesheets-footer-bg-repeat: repeat-x;
+
+@import "timesheets/*.png";
+@include all-timesheets-sprites;
+*/
+
+footer li a {
+	background-size:76px auto;
+	width:76px;
+	height:44px;
+	text-indent:-9999em;
+}
+
+footer.timesheets-footer-bg {
+	background: url(/img/timesheets/footer-bg.png) repeat-x 0 0;
+	background-size:auto 50px;
+}
+
+header.timesheets-header-bg {
+	background: url(/img/timesheets/header-bg.png) repeat-x 0 0;
+	background-size:auto 44px;
+}
+
+section .row a {
+	background: url(/img/timesheets/icon-arrow.png) no-repeat right 6px;
+	background-size:auto 32px;
+	padding: 12px 30px 12px 12px;
+	position: relative;
+}
+
+section#offices .row a {padding-left: 40px;}
+
+section .row a .icon-office {
+	background: url(/img/timesheets/icon-office.png) no-repeat 5px 0;
+	background-size:auto 45px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 31px;
+	height: 45px;
+	text-indent: -9999em;
+}
+
+
+footer li a.timesheets-icon-timesheets {
+	background: url(/img/timesheets/icon-timesheets.png) no-repeat 0 0;
+}
+footer li a.timesheets-icon-offices {
+	background: url(/img/timesheets/icon-offices.png) no-repeat 0 0;
+}
+footer li a.timesheets-icon-help {
+	background: url(/img/timesheets/icon-help.png) no-repeat 0 0;
+}
+footer li a.timesheets-icon-settings {
+	background: url(/img/timesheets/icon-settings.png) no-repeat 0 0;
+}
+
+footer li a.timesheets-icon-timesheets.active,
+footer li a.timesheets-icon-timesheets.touchstart {
+	background: url(/img/timesheets/icon-timesheets_active.png) no-repeat 0 0;
+}
+footer li a.timesheets-icon-offices.active,
+footer li a.timesheets-icon-offices.touchstart {
+	background: url(/img/timesheets/icon-offices_active.png) no-repeat 0 0;
+}
+footer li a.timesheets-icon-help.active,
+footer li a.timesheets-icon-help.touchstart {
+	background: url(/img/timesheets/icon-help_active.png) no-repeat 0 0;
+}
+footer li a.timesheets-icon-settings.active,
+footer li a.timesheets-icon-settings.touchstart {
+	background: url(/img/timesheets/icon-settings_active.png) no-repeat 0 0;
+}

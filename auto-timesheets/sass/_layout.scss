@@ -1,0 +1,122 @@
+* { margin: 0; padding: 0; outline: 0; border: 0; -webkit-box-sizing: border-box } /* we'll add outlines on a case by case basis */
+ul { list-style-type: none }
+
+html {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-perspective: 800;
+  -webkit-transform:translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
+  -webkit-text-size-adjust: none;
+  -webkit-transform-style: preserve-3d;
+  -webkit-user-select: none;
+  font: normal 14px Helvetica, Sans-serif;
+  /*font-family: 'PT Sans Narrow', sans-serif;*/
+  background: url(/img/section-bg.png) repeat 0 0;
+  background-size: 320px auto;
+}
+
+body a {
+  cursor: pointer;
+  display: block;
+}
+
+body section {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  display: block;
+  pointer-events: none;
+  -webkit-perspective: 800;
+  -webkit-transform: translateX(-100%);
+}
+
+.box {
+  padding: 20px;
+}
+
+.box h2 {
+  color: #4c566c;
+  padding: 0px 12px 6px 12px;
+}
+
+section .row {
+  border-width: 0px 0 1px 0;
+  border-style: solid;
+  border-color: #e9e9e9;
+  background-color: #fff;
+}
+section .row.touchstart {background: #eee;}
+
+section .row.first {
+  -webkit-border-radius: 10px 10px 0px 0px;
+  border-top-width: 1px;
+}
+
+section .row.last {
+  -webkit-border-radius: 0px 0px 10px 10px;
+  border-bottom-width: 1px;
+}
+
+
+.hours-under {color: red;}
+.hours-over {color: green;}
+
+#timesheets .hours {
+  float: right;
+  font-size:1.1em;
+}
+
+body section.active {
+  
+  display: block;
+  -webkit-transform: translateX(0%);
+  /*-webkit-animation: slideInFromRight 0.5s ease-in-out;*/
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* use these classes instead for controlling CSS sliding animation */
+body section.slideOutToLeft {
+  -webkit-transform: translateX(-100%);
+  -webkit-animation: slideOutToLeft $animation-time ease-in-out;
+  pointer-events: auto;
+}
+body section.slideOutToRight {
+  -webkit-transform: translateX(-100%);
+  -webkit-animation: slideOutToRight $animation-time ease-in-out;
+  pointer-events: auto;
+}
+body section.slideInFromLeft {
+  opacity: 1;
+  -webkit-transform: translateX(0%);
+  -webkit-animation: slideInFromLeft $animation-time ease-in-out;
+  pointer-events: auto;
+}
+body section.slideInFromRight {
+  opacity: 1;
+  -webkit-transform: translateX(0%);
+  -webkit-animation: slideInFromRight $animation-time ease-in-out;
+  pointer-events: auto;
+}
+
+/* for changing section ie from timesheets to offices */
+body section.fadeOut {
+  opacity: 0;
+  -moz-opacity: 0;
+  filter:alpha(opacity=0);
+  -webkit-animation: fadeOut $animation-time ease-in-out;
+}
+body section.fadeIn {
+  opacity: 1;
+  -moz-opacity: 1;
+  filter:alpha(opacity=1);
+  -webkit-animation: fadeIn $animation-time ease-in-out;
+}
