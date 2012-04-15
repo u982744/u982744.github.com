@@ -10,11 +10,54 @@
 /* -----------------------------------------
    Shared Styles
 ----------------------------------------- */
+a {
+	color: #96002A;
+}
 .posts p a {
 	line-height:16px;
 }
 .posts p a span {
 	font-size:10px;
+}
+
+
+#main .content .box-white {
+	border: 3px solid #96002A;
+	border-radius:0px;
+	box-shadow:2px 2px 2px #000000;
+}
+
+#main .content .box-white p {
+	border:7px solid #000;
+	border-radius: 0;
+	border-bottom:0;
+	border-top:0;
+}
+#main .content .box-white p:first-child {
+	border-top: 7px solid #000;
+}
+#main .content .box-white p:last-child {
+	border-bottom: 7px solid #000;
+}
+
+#main .content .box-white p a {
+	border:2px solid #fa9e22;
+	border-top:0;
+}
+#main .content .box-white p:first-child a {
+	border-top:2px solid #fa9e22;
+}
+#main .content .box-white p:last-child a {
+	
+}
+
+#main .content .box-white p span {
+	color: #000;
+}
+
+#main .header .left, #main .header .right {
+	background: -moz-linear-gradient(center top , #ba0034 0%, #96002A 100%) repeat scroll 0 0 transparent;
+	border-color:#7a0022;
 }
 
 
